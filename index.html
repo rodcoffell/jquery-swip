@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>swip demos</title>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+
+<style>
+body,html{padding:0;}
+body,html{margin:0;}
+h3{ color:#666666; margin-top:30px; padding:10px 5px; background:#FFFFCC;}
+pre, code{padding:0; margin:0}
+.required{color:#990000;}
+.doNotUse{color:#CCCCCC;}
+dl{padding-bottom:3px;}
+.nav{text-align:right;padding:0;margin:0;}
+h5{ background-color:#eee; padding:7px;}
+</style>
+</head>
+
+<body style="padding:50px;">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHTwYJKoZIhvcNAQcEoIIHQDCCBzwCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYC/nL9ZkYka9Gm5TuPEaMOSwhnd0L4dotKjlNTXyr7M/eqUVq5nLUnPvDMpfSwdGyXA9AlUmEC+TO7wsGNsYgCVV7YherSc61U2k3PMPHF3n3RQ6v7Ay44vRPTPj8QfMc3gerL9pV0szZ+BQTnvDFOQePzpwKiqJ2CMMMXjPOtA+DELMAkGBSsOAwIaBQAwgcwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIpqk1P0MBb0KAgag10BGE/OzD8PWBkRBDVlBR6eLfnavKWtnbrXDKp22/EMhKgPuHfLdJQi4q4Q9sdgYw6FBh8yDAinN1kiZaKyk+gbXoD/0dwJ6JvNnIh7kqOtOjPufSUUjlOXWqpUyIotXeom5ggqPgdhDBuoEXXfky3jaBzw2QIDXwMUxyPkpZH6br+kXyH3yvxgAqgKHTzv3K42EVdgjBg/Uwu06yynq2ZWyUp5gF696gggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0wODA3MDcyMjE5MTNaMCMGCSqGSIb3DQEJBDEWBBSIdEvBAC8USGbQQYegZ1tyctdVqjANBgkqhkiG9w0BAQEFAASBgJdlZxNcyMCNF5+K0GJ4nEKltmuZ3o+K63S1gET3FGNz9pQp7KWgpTBMTirjDNg2lDM77rCC9Y+TG2Gs3amyiogGS12Mn1EkSEWKtMnFCHpIPYlTKfbk7CxneOHm931TP6G935hlrEcwpz/wHErSjwUMBCXM2izWbkJbQbnWGK9k-----END PKCS7-----
+">
+</form>
+<p class="nav"><small><a href="http://code.google.com/p/jquery-swip">swip SVN</a> | <a href="http://code.google.com/p/jquery-swip/issues/list">report issue</a></small></p>
+<h1>jQuery-swip demos</h1>
+<p>jQuery-swip are a collection of jQuery plugins (javascript, css, html) specifically developed to aid the creation of common interface patterns found in browser based applications. The intention of the developer was to create a code base for these patterns that can be used to accommodate any visual design. These plugins are an extension to the jQuery UI plugins.</p>
+<h5>SWIP Authored</h5>
+<ul>
+<li><a href="popupWindowDemo.html">popup window</a></li>
+<li><a href="DOMWindowDemo.html">DOM window</a></li>
+<li><a href="tooltipDemo.html">tooltip</a></li>
+<li><a href="scrollContentDemo.html">scroll content</a></li>
+</ul>
+<h5>Authored by <a href="http://ui.jquery.com/">jQuery UI team</a></h5>
+<ul>
+<li><a href="accordionDemo.html">accordion</a></li>
+<li><a href="sliderDemo.html">slider</a></li>
+</ul>
+
+
+<h5>Patterns of Interest</a></h5>
+<p>data grids</p>
+<ul>
+<li><a href="http://webplicity.net/flexigrid/">flexigrid</a></li>
+<li><a href="http://reconstrukt.com/ingrid/example1.html">ingrid</a></li>
+<li><a href="http://www.trirand.com/blog/">jQuery Grid</a></li>
+</ul>
+<p>selection</p>
+<ul>
+<li><a href="http://code.google.com/p/jquery-asmselect/">jquery-asmselect</a></li>
+</ul>
+<p>scroller</p>
+<ul>
+<li><a href="http://www.flowplayer.org/tools/scrollable.html">http://www.flowplayer.org/tools/scrollable.html</a></li>
+<li><a href="http://www.gmarwaha.com/jquery/jcarousellite/index.php">http://www.gmarwaha.com/jquery/jcarousellite/index.php</a></li>
+</ul>
+<p>image magnifier</p>
+<ul><li>
+<a href="http://www.jnathanson.com/index.cfm?page=pages/jquery/magnify/magnify">http://www.jnathanson.com/index.cfm?page=pages/jquery/magnify/magnify</a>
+</li></ul>
+
+<h5>Excellent Examples/Patterns from other Javascript Libraries.</h5>
+<p>DOM Windows</p>
+<ul>
+<li><a href="http://mjijackson.com/shadowbox/">shadowbox</a></li>
+<li><a href="http://stickmanlabs.com/lightwindow/">LightWindow v2.0</a></li>
+</ul>
+<p>tooltip</p>
+<ul>
+<li><a href="http://www.nickstakenburg.com/projects/prototip2/">prototip</a></li>
+</ul>
+
+
+<script type="text/javascript">
+_uacct = "UA-162561-8";
+urchinTracker();
+</script>
+</body>
+</html>
