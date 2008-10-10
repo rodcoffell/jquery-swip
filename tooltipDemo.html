@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Tooltip (jquery.tooltip.js)</title>
+
+<link rel="stylesheet" href="jquery-ui-themeroller.css" type="text/css" media="screen" />
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="jquery.hoverIntent.js"></script>
+<script type="text/javascript" src="jquery.tooltip.js"></script>
+
+<style>
+body,html{padding:0;}
+body,html{margin:0;}
+h3{ color:#666666; margin-top:30px; padding:10px 5px; background:#FFFFCC;}
+pre, code{padding:0; margin:0}
+.required{color:#990000;}
+.doNotUse{color:#CCCCCC;}
+dl{padding-bottom:3px;}
+.nav{text-align:right;padding:0;margin:0;}
+code{ *font-size:12px;}
+</style>
+
+</head>
+<body style="padding:50px;">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+</form>
+<p class="nav"><small><a href="index.html">swip demos</a> | <a href="http://code.google.com/p/jquery-swip">swip SVN</a> | <a href="http://code.google.com/p/jquery-swip/issues/list">report issue</a></small></p>
+<h1>tooltip</h1>
+<h3>$(selector).tooltip({options});</h3>
+<p>jQuery plugin (<a href="jquery.tooltip.js">jquery.tooltip.js</a>) used to create tooltips.</p>
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<h4>Example 1</h4>
+<div id="example1" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-1-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-1-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-1-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-1-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-1-tab-1">
+                <p>Default tooltip using content from the title attribute of an &lt;a&gt; element. The height and width are set to be 100% of the containing content of the tooltip.</p>
+            </div>
+			<div id="example-1-tab-2" style="overflow:auto">
+<p><a href="http://www.google.com" class="example1tooltip" title="This is a default tool tip">mouseover me</a></p>
+<!--[if IE 6]>
+<p><select name="">
+<option>IE 6 Test</option>
+</select></p>
+<![endif]-->
+<script type="text/javascript">
+$('.example1tooltip').tooltip();
+</script>
+			</div>
+            <div id="example-1-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-1-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt>attributeName - datatype:string, default:'title'</dt>
+			<dt>borderColor - datatype:string, default:'#ccc'</dt>
+			<dt>borderSize - datatype:string, default:'1'</dt>
+			<dt>cancelClick - datatype:boolean, default:0</dt>
+			<dt>followMouse - datatype:boolean, default:1</dt>
+			<dt>height - datatype:string, default:'auto'</dt>
+			<dt>hoverIntent - datatype:object default:{sensitivity:7,interval:100,timeout:0}</dt>
+			<dt>loader - datatype:boolean, default:0,</dt>
+			<dt>loaderHeight - datatype:number, default:0</dt>
+			<dt>loaderImagePath - datatype:string, default:empty string,</dt>
+			<dt>loaderWidth - datatype:number, default:0</dt>
+			<dt>positionTop - datatype:number, default: 12</dt>
+			<dt>positionLeft - datatype:number, default: 12</dt>
+			<dt>width - datatype:string, default:'auto'</dt>
+			<dt class="doNotUse">titleAttributeContent - datatype:string, default:empty string,</dt>
+			<dt>tooltipBGColor - datatype:string, default:'#fff'</dt>
+			<dt>tooltipBGImage - datatype:string, default:'none'</dt>
+			<dt>tooltipHTTPType - datatype:string, default:'get', possible options: get | post</dt>
+			<dt>tooltipPadding - datatype:number, default:10</dt>
+			<dt>tooltipSource - datatype:string, default:'attribute', possible options: inline | ajax | attribute</dt>
+			<dt>tooltipSourceID - datatype:string, default:empty string</dt>
+			<dt>tooltipSourceURL - datatype:string, default:empty string</dt>
+			<dt>tooltipID - datatype:string, default:'tooltip'</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h4>Example 2</h4>
+<div id="example2" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-2-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-2-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-2-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-2-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-2-tab-1">
+                <p>Tooltip applied to an input element using content from an ajax call. The height and width are fixed dimensions (px's).</p>
+            </div>
+			<div id="example-2-tab-2" style="overflow:auto">
+<p><input name="" type="text" value="mouseover me" class="example2tooltip" /></p>
+<script type="text/javascript">
+$('.example2tooltip').tooltip({
+tooltipSourceURL:'ajaxContentTooltip.html',
+loader:1,
+loaderImagePath:'animationProcessing.gif',
+loaderHeight:16,
+loaderWidth:17,
+width:'500px',
+height:'200px',
+tooltipSource:'ajax',
+borderSize:'4'
+});
+</script>
+			</div>
+            <div id="example-2-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-2-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt>attributeName - datatype:string, default:'title'</dt>
+			<dt>borderColor - datatype:string, default:'#ccc'</dt>
+			<dt>borderSize - datatype:string, default:'1'</dt>
+			<dt>cancelClick - datatype:boolean, default:0</dt>
+			<dt>followMouse - datatype:boolean, default:1</dt>
+			<dt>height - datatype:string, default:'auto'</dt>
+			<dt>hoverIntent - datatype:object default:{sensitivity:7,interval:100,timeout:0}</dt>
+			<dt>loader - datatype:boolean, default:0,</dt>
+			<dt>loaderHeight - datatype:number, default:0</dt>
+			<dt>loaderImagePath - datatype:string, default:empty string,</dt>
+			<dt>loaderWidth - datatype:number, default:0</dt>
+			<dt>positionTop - datatype:number, default: 12</dt>
+			<dt>positionLeft - datatype:number, default: 12</dt>
+			<dt>width - datatype:string, default:'auto'</dt>
+			<dt class="doNotUse">titleAttributeContent - datatype:string, default:empty string,</dt>
+			<dt>tooltipBGColor - datatype:string, default:'#fff'</dt>
+			<dt>tooltipBGImage - datatype:string, default:'none'</dt>
+			<dt>tooltipHTTPType - datatype:string, default:'get', possible options: get | post</dt>
+			<dt>tooltipPadding - datatype:number, default:10</dt>
+			<dt class="required">tooltipSource - datatype:string, default:'attribute', possible options: inline | ajax | attribute</dt>
+			<dt>tooltipSourceID - datatype:string, default:empty string</dt>
+			<dt  class="required">tooltipSourceURL - datatype:string, default:empty string</dt>
+			<dt>tooltipID - datatype:string, default:'tooltip'</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h4>Example 3</h4>
+<div id="example3" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-3-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-3-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-3-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-3-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-3-tab-1">
+                <p>Tooltip applied to a span element using content from an inline div hidden on the page. The height and width are fixed dimensions (px's).</p>
+            </div>
+			<div id="example-3-tab-2" style="overflow:auto">
+<p style="float:right"><span class="example3tooltip" style="display:block;height:30px;width:150px; padding:3px; background-color:#99FFFF; line-height:30px; text-align:center">mouseover me</span></p>
+<script type="text/javascript">
+$('.example3tooltip').tooltip({
+tooltipSourceID:'#example3Content',
+loader:1,
+loaderImagePath:'animationProcessing.gif',
+loaderHeight:16,
+loaderWidth:17,
+width:'400px',
+height:'200px',
+tooltipSource:'inline',
+borderSize:'0',
+tooltipBGColor:'#efefef'
+});
+</script>
+<div id="example3Content" style=" display:none">
+<p>Inline Content</p>
+<p>Consequat ea Investigationes in enim congue. Option velit volutpat quod blandit ex. Congue parum praesent aliquam nam clari. Qui praesent quam sollemnes id vulputate. In imperdiet diam at sequitur et. Minim delenit in dolor dolore typi. Erat delenit laoreet quinta videntur id. Ii at qui eum ut usus. Quis etiam suscipit iusto elit dolor. Dolor congue eodem adipiscing cum placerat.</p>
+</div>
+
+			</div>
+            <div id="example-3-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-3-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt>attributeName - datatype:string, default:'title'</dt>
+			<dt>borderColor - datatype:string, default:'#ccc'</dt>
+			<dt>borderSize - datatype:string, default:'1'</dt>
+			<dt>cancelClick - datatype:boolean, default:0</dt>
+			<dt>followMouse - datatype:boolean, default:1</dt>
+			<dt>height - datatype:string, default:'auto'</dt>
+			<dt>hoverIntent - datatype:object default:{sensitivity:7,interval:100,timeout:0}</dt>
+			<dt>loader - datatype:boolean, default:0,</dt>
+			<dt>loaderHeight - datatype:number, default:0</dt>
+			<dt>loaderImagePath - datatype:string, default:empty string,</dt>
+			<dt>loaderWidth - datatype:number, default:0</dt>
+			<dt>positionTop - datatype:number, default: 12</dt>
+			<dt>positionLeft - datatype:number, default: 12</dt>
+			<dt>width - datatype:string, default:'auto'</dt>
+			<dt class="doNotUse">titleAttributeContent - datatype:string, default:empty string,</dt>
+			<dt>tooltipBGColor - datatype:string, default:'#fff'</dt>
+			<dt>tooltipBGImage - datatype:string, default:'none'</dt>
+			<dt>tooltipHTTPType - datatype:string, default:'get', possible options: get | post</dt>
+			<dt>tooltipPadding - datatype:number, default:10</dt>
+			<dt class="required">tooltipSource - datatype:string, default:'attribute', possible options: inline | ajax | attribute</dt>
+			<dt class="required">tooltipSourceID - datatype:string, default:empty string</dt>
+			<dt>tooltipSourceURL - datatype:string, default:empty string</dt>
+			<dt>tooltipID - datatype:string, default:'tooltip'</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h5>Possible upgrades</h5>
+<ul>
+<li>N/A</li>
+</ul>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<script type="text/javascript">
+
+$('#example1 > ul').tabs({selected:0});
+$('#example1 > div:eq(2) pre code').html(replaceTags($('#example1 > div:eq(1)').html()));
+
+$('#example2 > ul').tabs({selected:0});
+$('#example2 > div:eq(2) pre code').html(replaceTags($('#example2 > div:eq(1)').html()));
+
+$('#example3 > ul').tabs({selected:0});
+$('#example3 > div:eq(2) pre code').html(replaceTags($('#example3 > div:eq(1)').html()));
+
+function replaceTags(stringTxt) {
+	var theExp = /<([^<>]*)>/g;
+	var newString = jQuery.trim(stringTxt.replace(theExp,"&lt;$1&gt;"));
+	return newString;
+}
+
+_uacct = "UA-162561-8";
+urchinTracker();
+</script>
+
+<script src="jquery.chili-2.1.1.js" type="text/javascript"></script>
+<script src="recipes.js" type="text/javascript"></script>
+
+</body>
+</html>

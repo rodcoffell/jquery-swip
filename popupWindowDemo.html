@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Popup Window (jquery.popupWindow.js)</title>
+
+<link rel="stylesheet" href="jquery-ui-themeroller.css" type="text/css" media="screen" />
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="jquery.popupWindow.js"></script>
+
+
+<style>
+body,html{padding:0;}
+body,html{margin:0;}
+h3{ color:#666666; margin-top:30px; padding:10px 5px; background:#FFFFCC;}
+pre, code{padding:0; margin:0}
+.required{color:#990000;}
+.doNotUse{color:#CCCCCC;}
+dl{padding-bottom:3px;}
+.nav{text-align:right;padding:0;margin:0;}
+code{ *font-size:12px;}
+</style>
+
+</head>
+<body style="padding:50px;">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+</form>
+<p class="nav"><small><a href="index.html">swip demos</a> | <a href="http://code.google.com/p/jquery-swip">swip SVN</a> | <a href="http://code.google.com/p/jquery-swip/issues/list">report issue</a></small></p>
+<h1>popup window</h1>
+<h3>$(selector).popupWindow({options});</h3>
+<p>jQuery plugin (<a href="jquery.popupWindow.js">jquery.popupWindow.js</a>) used to create popup windows.</p>
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<h4>Example 1</h4>
+<div id="example1" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-1-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-1-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-1-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-1-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-1-tab-1">
+                <p>Open yahoo.com in a popup window (800x500) positioned 50 pixels from the top and left side of the screen.</p>
+            </div>
+			<div id="example-1-tab-2" style="overflow:auto">
+<p><a href="http://www.yahoo.com" title="yahoo.com" class="example1demo">open popup</a></p>
+<script type="text/javascript">
+$('.example1demo').popupWindow({
+height:500,
+width:800,
+top:50,
+left:50
+});
+</script>
+			</div>
+            <div id="example-1-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-1-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt class="doNotUse">centerBrowser - datatype:boolean, default:0</dt>
+			<dt class="doNotUse">centerScreen - datatype:boolean, default:0</dt>
+			<dt>height - datatype:number, default:500</dt>
+			<dt>left - datatype:boolean, default:0</dt>
+			<dt>location - datatype:boolean, default:0</dt>
+			<dt>menubar - datatype:boolean, default:0</dt>
+			<dt>resizable - datatype:boolean, default:0</dt>
+			<dt>scrollbars - datatype:boolean, default:0</dt>
+			<dt>status - datatype:boolean, default:0</dt>
+			<dt>width - datatype:number, default:500</dt>
+			<dt>windowName - datatype:string, default:null</dt>
+			<dt class="doNotUse">windowURL - datatype:string, default:null</dt>
+			<dt>top - datatype:boolean, default:0</dt>
+			<dt>toolbar - datatype:boolean, default:0</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h4>Example 2</h4>
+<div id="example2" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-2-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-2-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-2-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-2-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-2-tab-1">
+                <p>Open a popup, centered over the top of the browser, using the same window. In order to have popup windows re-use the same window the element the invokes the popup needs to have the same name attribute value. In this example, I use the name "windowX" to identify that both links use the same window.</p>
+            </div>
+			<div id="example-2-tab-2" style="overflow:auto">
+<p><a href="http://www.google.com" title="google.com" class="example2demo" name="windowX">open google.com</a>
+ | <a href="http://www.cnn.com" title="cnn.com" class="example2demo" name="windowX">open cnn.com, using the same window used to open google.com</a></p>
+<script type="text/javascript">
+$('.example2demo').popupWindow({
+centerBrowser:1
+});
+</script>
+			</div>
+            <div id="example-2-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-2-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt class="required">centerBrowser - datatype:boolean, default:0</dt>
+			<dt>centerScreen - datatype:boolean, default:0</dt>
+			<dt>height - datatype:number, default:500</dt>
+			<dt class="doNotUse">left - datatype:boolean, default:0</dt>
+			<dt>location - datatype:boolean, default:0</dt>
+			<dt>menubar - datatype:boolean, default:0</dt>
+			<dt>resizable - datatype:boolean, default:0</dt>
+			<dt>scrollbars - datatype:boolean, default:0</dt>
+			<dt>status - datatype:boolean, default:0</dt>
+			<dt>width - datatype:number, default:500</dt>
+			<dt>windowName - datatype:string, default:null</dt>
+			<dt class="doNotUse">windowURL - datatype:string, default:null</dt>
+			<dt class="doNotUse">top - datatype:boolean, default:0</dt>
+			<dt>toolbar - datatype:boolean, default:0</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h4>Example 3</h4>
+<div id="example3" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-3-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-3-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-3-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-3-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-3-tab-1">
+                <p>Open a popup window, centered on the screen, not using the same window.</p>
+            </div>
+			<div id="example-3-tab-2" style="overflow:auto">
+<p><a href="http://www.aol.com" class="example3demo">open aol.com</a> | 
+<a href="http://www.msn.com" class="example3demo">open msn.com</a></p>
+<script type="text/javascript">
+$('.example3demo').popupWindow({
+centerScreen:1
+});
+</script>
+			</div>
+            <div id="example-3-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-3-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt class="doNotUse">centerBrowser - datatype:boolean, default:0</dt>
+			<dt class="required">centerScreen - datatype:boolean, default:0</dt>
+			<dt>height - datatype:number, default:500</dt>
+			<dt class="doNotUse">left - datatype:boolean, default:0</dt>
+			<dt>location - datatype:boolean, default:0</dt>
+			<dt>menubar - datatype:boolean, default:0</dt>
+			<dt>resizable - datatype:boolean, default:0</dt>
+			<dt>scrollbars - datatype:boolean, default:0</dt>
+			<dt>status - datatype:boolean, default:0</dt>
+			<dt>width - datatype:number, default:500</dt>
+			<dt>windowName - datatype:string, default:null</dt>
+			<dt class="doNotUse">windowURL - datatype:string, default:null</dt>
+			<dt class="doNotUse">top - datatype:boolean, default:0</dt>
+			<dt>toolbar - datatype:boolean, default:0</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h4>Example 4</h4>
+<div id="example4" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-4-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-4-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-4-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-4-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-4-tab-1">
+                <p>Open a popup by using an element other than an href to pass URL value.</p>
+            </div>
+			<div id="example-4-tab-2" style="overflow:auto">
+<p><button class="example4demo">open window</button></p>
+<script type="text/javascript">
+$('.example4demo').popupWindow({
+windowURL:'http://code.google.com/p/swip/',
+windowName:'swip'
+});
+</script>
+			</div>
+            <div id="example-4-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-4-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt class="doNotUse">centerBrowser - datatype:boolean, default:0</dt>
+			<dt class="doNotUse">centerScreen - datatype:boolean, default:0</dt>
+			<dt>height - datatype:number, default:500</dt>
+			<dt>left - datatype:boolean, default:0</dt>
+			<dt>location - datatype:boolean, default:0</dt>
+			<dt>menubar - datatype:boolean, default:0</dt>
+			<dt>resizable - datatype:boolean, default:0</dt>
+			<dt>scrollbars - datatype:boolean, default:0</dt>
+			<dt>status - datatype:boolean, default:0</dt>
+			<dt>width - datatype:number, default:500</dt>
+			<dt>windowName - datatype:string, default:null</dt>
+			<dt class="required">windowURL - datatype:string, default:null</dt>
+			<dt>top - datatype:boolean, default:0</dt>
+			<dt>toolbar - datatype:boolean, default:0</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h5>Possible upgrades</h5>
+<ul>
+<li>N/A</li>
+</ul>
+
+
+<script type="text/javascript">
+
+$('#example1 > ul').tabs({selected:0});
+$('#example1 > div:eq(2) pre code').html(replaceTags($('#example1 > div:eq(1)').html()));
+
+$('#example2 > ul').tabs({selected:0});
+$('#example2 > div:eq(2) pre code').html(replaceTags($('#example2 > div:eq(1)').html()));
+
+$('#example3 > ul').tabs({selected:0});
+$('#example3 > div:eq(2) pre code').html(replaceTags($('#example3 > div:eq(1)').html()));
+
+$('#example4 > ul').tabs({selected:0});
+$('#example4 > div:eq(2) pre code').html(replaceTags($('#example4 > div:eq(1)').html()));
+
+function replaceTags(stringTxt) {
+	var theExp = /<([^<>]*)>/g;
+	var newString = jQuery.trim(stringTxt.replace(theExp,"&lt;$1&gt;"));
+	return newString;
+}
+
+
+
+_uacct = "UA-162561-8";
+urchinTracker();
+</script>
+
+<script src="jquery.chili-2.1.1.js" type="text/javascript"></script>
+<script src="recipes.js" type="text/javascript"></script>
+
+</body>
+</html>
