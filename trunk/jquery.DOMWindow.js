@@ -3,7 +3,7 @@
 	//closeDOMWindow
 	$.fn.closeDOMWindow = function(settings){
 		
-		if(!settings){settings={}};
+		if(!settings){settings={};}
 		
 		var run = function(passingThis){
 			
@@ -14,7 +14,7 @@
 					}else{
 						$('.'+settings.anchoredClassName).trigger("unload").remove();
 					}
-				})
+				});
 				if(settings.functionCallOnClose){settings.functionCallAfterClose();}
 			}else{
 				$('#DOMWindowOverlay').fadeOut('fast',function(){
@@ -31,7 +31,7 @@
 				$(window).unbind('scroll.DOMWindow');
 				$(window).unbind('resize.DOMWindow');
 				
-				if($.fn.openDOMWindow.isIE6){$('#DOMWindowIE6FixIframe').remove()};
+				if($.fn.openDOMWindow.isIE6){$('#DOMWindowIE6FixIframe').remove();}
 				if(settings.functionCallOnClose){settings.functionCallAfterClose();}
 			}	
 		};
@@ -50,14 +50,14 @@
 	};
 	
 	//allow for public call, pass settings
-	$.closeDOMWindow = function(s){$.fn.closeDOMWindow(s)};
+	$.closeDOMWindow = function(s){$.fn.closeDOMWindow(s);};
 	
 	//openDOMWindow
 	$.fn.openDOMWindow = function(instanceSettings){	
 		
 		var shortcut =  $.fn.openDOMWindow;
 	
-		/*default settings combined with callerSettings////////////////////////////////////////////////////////////////////////*/
+		//default settings combined with callerSettings////////////////////////////////////////////////////////////////////////
 		
 		shortcut.defaultsSettings = {
 			anchoredClassName:'',
@@ -83,7 +83,7 @@
 			positionType:'centered', // centered, anchored, absolute, fixed
 			width:500, 
 			windowBGColor:'#fff',
-			windowBGImage:'none', // http path
+			windowBGImage:null, // http path
 			windowHTTPType:'get',
 			windowPadding:10,
 			windowSource:'inline', //inline, ajax, iframe
@@ -101,7 +101,7 @@
 		shortcut.scrollOffsetWidth = function(){ return self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft;};
 		shortcut.isIE6 = typeof document.body.style.maxHeight === "undefined";
 		
-		/*Private Functions/////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+		//Private Functions/////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		var sizeOverlay = function(){
 			if(shortcut.isIE6){//if IE 6
@@ -174,12 +174,14 @@
 			  return query;
 		};
 			
-		/*Run Routine ///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+		//Run Routine ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		var run = function(passingThis){
 			
 			//get values from element clicked, or assume its passed as an option
 			settings.windowSourceID = $(passingThis).attr('href') || settings.windowSourceID;
 			settings.windowSourceURL = $(passingThis).attr('href') || settings.windowSourceURL;
+			settings.windowBGImage = settings.windowBGImage ? 'background-image:url('+settings.windowBGImage+')' : '';
+			var urlOnly, urlQueryObject;
 			
 			
 			if(settings.positionType == 'anchored'){//anchored DOM window
@@ -188,32 +190,32 @@
 				var anchoredPositionX = anchoredPositions.left + settings.positionLeft;
 				var anchoredPositionY = anchoredPositions.top + settings.positionTop;
 				
-				$('body').append('<div class="'+settings.anchoredClassName+'" style="background-image:url('+settings.windowBGImage+');background-repeat:no-repeat;padding:'+settings.windowPadding+'px;overflow:auto;position:absolute;top:'+anchoredPositionY+'px;left:'+anchoredPositionX+'px;height:'+settings.height+'px;width:'+settings.width+'px;background-color:'+settings.windowBGColor+';border:'+settings.borderSize+'px solid '+settings.borderColor+';z-index:10001"><div id="DOMWindowContent" style="display:none"></div></div>');		
+				$('body').append('<div class="'+settings.anchoredClassName+'" style="'+settings.windowBGImage+';background-repeat:no-repeat;padding:'+settings.windowPadding+'px;overflow:auto;position:absolute;top:'+anchoredPositionY+'px;left:'+anchoredPositionX+'px;height:'+settings.height+'px;width:'+settings.width+'px;background-color:'+settings.windowBGColor+';border:'+settings.borderSize+'px solid '+settings.borderColor+';z-index:10001"><div id="DOMWindowContent" style="display:none"></div></div>');		
 				//loader
-				if(settings.loader && settings.loaderImagePath != ''){
+				if(settings.loader && settings.loaderImagePath !== ''){
 					$('.'+settings.anchoredClassName).append('<div id="DOMWindowLoader" style="width:'+settings.loaderWidth+'px;height:'+settings.loaderHeight+'px;"><img src="'+settings.loaderImagePath+'" /></div>');
 					
 				}
 
 				if($.fn.draggable){
-					if(settings.draggable){$('.' + settings.anchoredClassName).draggable({cursor:'move'})};
+					if(settings.draggable){$('.' + settings.anchoredClassName).draggable({cursor:'move'});}
 				}
 				
 				switch(settings.windowSource){
-					case 'inline':/*/////////////////////////////// inline //////////////////////////////////////////*/
+					case 'inline'://////////////////////////////// inline //////////////////////////////////////////
 						$('.' + settings.anchoredClassName+" #DOMWindowContent").append($(settings.windowSourceID).children());
 						$('.' + settings.anchoredClassName).unload(function(){// move elements back when you're finished
 							$('.' + settings.windowSourceID).append( $('.' + settings.anchoredClassName+" #DOMWindowContent").children());				
 						});
 						showDOMWindow(settings.anchoredClassName);
 					break;
-					case 'iframe':/*/////////////////////////////// iframe //////////////////////////////////////////*/
+					case 'iframe'://////////////////////////////// iframe //////////////////////////////////////////
 						$('.' + settings.anchoredClassName+" #DOMWindowContent").append('<iframe frameborder="0" hspace="0" wspace="0" src="'+settings.windowSourceURL+'" name="DOMWindowIframe'+Math.round(Math.random()*1000)+'" style="width:100%;height:100%;border:none;background-color:#fff;" class="'+settings.anchoredClassName+'Iframe" ></iframe>');
 						$('.'+settings.anchoredClassName+'Iframe').load(showDOMWindow(settings.anchoredClassName));
 					break;
-					case 'ajax':/*/////////////////////////////// ajax //////////////////////////////////////////*/	
+					case 'ajax'://////////////////////////////// ajax //////////////////////////////////////////	
 						if(settings.windowHTTPType == 'post'){
-							var urlOnly, urlQueryObject;
+							
 							if(settings.windowSourceURL.indexOf("?") !== -1){//has a query string
 								urlOnly = settings.windowSourceURL.substr(0, settings.windowSourceURL.indexOf("?"));
 								urlQueryObject = urlQueryToObject(settings.windowSourceURL);
@@ -234,7 +236,7 @@
 							});
 						}
 					break;
-				};
+				}
 				
 			}else{//centered, fixed, absolute DOM window
 				
@@ -247,17 +249,17 @@
 					}
 					sizeOverlay(); 
 					$('#DOMWindowOverlay').fadeIn('fast');
-					if(!settings.modal){ $('#DOMWindowOverlay').click(function(){$.closeDOMWindow()}) };
-				};
+					if(!settings.modal){$('#DOMWindowOverlay').click(function(){$.closeDOMWindow();});}
+				}
 				
 				//loader
-				if(settings.loader && settings.loaderImagePath != ''){
+				if(settings.loader && settings.loaderImagePath !== ''){
 					$('body').append('<div id="DOMWindowLoader" style="z-index:10002;width:'+settings.loaderWidth+'px;height:'+settings.loaderHeight+'px;"><img src="'+settings.loaderImagePath+'" /></div>');
 					centerLoader();
 				}
 
 				//add DOMwindow
-				$('body').append('<div id="DOMWindow" style="background-repeat:no-repeat;background-image:url('+settings.windowBGImage+');overflow:auto;padding:'+settings.windowPadding+'px;display:none;height:'+settings.height+'px;width:'+settings.width+'px;background-color:'+settings.windowBGColor+';border:'+settings.borderSize+'px solid '+settings.borderColor+'; position:absolute;z-index:10001"></div>');
+				$('body').append('<div id="DOMWindow" style="background-repeat:no-repeat;'+settings.windowBGImage+';overflow:auto;padding:'+settings.windowPadding+'px;display:none;height:'+settings.height+'px;width:'+settings.width+'px;background-color:'+settings.windowBGColor+';border:'+settings.borderSize+'px solid '+settings.borderColor+'; position:absolute;z-index:10001"></div>');
 				
 				//centered, absolute, or fixed
 				switch(settings.positionType){
@@ -270,42 +272,42 @@
 					case 'absolute':
 						$('#DOMWindow').css({'top':(settings.positionTop+shortcut.scrollOffsetHeight())+'px','left':(settings.positionLeft+shortcut.scrollOffsetWidth())+'px'});
 						if($.fn.draggable){
-							if(settings.draggable){$('#DOMWindow').draggable({cursor:'move'})};
+							if(settings.draggable){$('#DOMWindow').draggable({cursor:'move'});}
 						}
 					break;
 					case 'fixed':
 						fixedDOMWindow();
 					break;
-				};
+				}
 				
 				$(window).bind('scroll.DOMWindow',function(){
-					if(settings.overlay){sizeOverlay()};
-					if(shortcut.isIE6){sizeIE6Iframe()};
-					if(settings.positionType == 'centered'){centerDOMWindow()};
-					if(settings.positionType == 'fixed'){fixedDOMWindow()};
+					if(settings.overlay){sizeOverlay();}
+					if(shortcut.isIE6){sizeIE6Iframe();}
+					if(settings.positionType == 'centered'){centerDOMWindow();}
+					if(settings.positionType == 'fixed'){fixedDOMWindow();}
 				});
 
 				$(window).bind('resize.DOMWindow',function(){
-					if(shortcut.isIE6){sizeIE6Iframe()};
-					if(settings.overlay){sizeOverlay()};
-					if(settings.positionType == 'centered'){centerDOMWindow()};
+					if(shortcut.isIE6){sizeIE6Iframe();}
+					if(settings.overlay){sizeOverlay();}
+					if(settings.positionType == 'centered'){centerDOMWindow();}
 				});
 				
 				switch(settings.windowSource){
-					case 'inline':/*/////////////////////////////// inline //////////////////////////////////////////*/
+					case 'inline'://////////////////////////////// inline //////////////////////////////////////////
 						$("#DOMWindow").append($(settings.windowSourceID).children());
 						$("#DOMWindow").unload(function(){// move elements back when you're finished
 							$(settings.windowSourceID).append( $("#DOMWindow").children());				
 						});
 						showDOMWindow();
 					break;
-					case 'iframe':/*/////////////////////////////// iframe //////////////////////////////////////////*/
+					case 'iframe'://////////////////////////////// iframe //////////////////////////////////////////
 						$('#DOMWindow').append('<iframe frameborder="0" hspace="0" wspace="0" src="'+settings.windowSourceURL+'" name="DOMWindowIframe'+Math.round(Math.random()*1000)+'" style="width:100%;height:100%;border:none;background-color:#fff;" id="DOMWindowIframe" ></iframe>');
 						$('#DOMWindowIframe').load(showDOMWindow());
 					break;
-					case 'ajax':/*/////////////////////////////// ajax //////////////////////////////////////////*/	
+					case 'ajax'://////////////////////////////// ajax //////////////////////////////////////////
 						if(settings.windowHTTPType == 'post'){
-							var urlOnly, urlQueryObject;
+							
 							if(settings.windowSourceURL.indexOf("?") !== -1){//has a query string
 								urlOnly = settings.windowSourceURL.substr(0, settings.windowSourceURL.indexOf("?"));
 								urlQueryObject = urlQueryToObject(settings.windowSourceURL);
@@ -326,7 +328,7 @@
 							});
 						}
 					break;
-				};
+				}
 				
 			}//end if anchored, or absolute, fixed, centered
 			
@@ -346,6 +348,6 @@
 	};//end function openDOMWindow
 	
 	//allow for public call, pass settings
-	$.openDOMWindow = function(s){$.fn.openDOMWindow(s)};
+	$.openDOMWindow = function(s){$.fn.openDOMWindow(s);};
 	
 })(jQuery);
