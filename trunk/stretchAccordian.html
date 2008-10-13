@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Scroll Content (jquery.scrollContent.js)</title>
+
+<link rel="stylesheet" href="jquery-ui-themeroller.css" type="text/css" media="screen" />
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js"></script>
+<script src="jquery.easing.1.3.js" type="text/javascript"></script>
+<script type="text/javascript" src="jquery.kwicks-1.5.1.js"></script>
+
+<style>
+body,html{padding:0;}
+body,html{margin:0;}
+h3{ color:#666666; margin-top:30px; padding:10px 5px; background:#FFFFCC;}
+pre, code{padding:0; margin:0}
+.required{color:#990000;}
+.doNotUse{color:#CCCCCC;}
+dl{padding-bottom:3px;}
+.nav{text-align:right;padding:0;margin:0;}
+code{ *font-size:12px;}
+a:focus, div.content * {
+outline: 0 !important;
+}
+
+#kwicksExample1{
+list-style:none;
+margin:0;
+padding:0;
+position:relative;
+width:500px;
+}
+
+#kwicksExample1 li{
+	float: left;
+	width: 200px;
+	height: 200px;
+	margin-right: 5px;
+	overflow:hidden;
+}
+
+#kwicksExample1 li p{
+margin:10px;
+height:150px;
+width:550px;
+overflow:auto;
+}
+
+#kwicksExample2{
+list-style:none;
+margin:0;
+padding:0;
+position:relative;
+}
+
+#kwicksExample2 li{
+	float: left;
+	width: 400px;
+	height: 100px;
+	margin-right: 5px;
+	overflow:hidden;
+}
+
+#kwicksExample2 li p{
+padding:10px;
+}
+
+#kwick1 { 
+	background-color:#e1e1e1;
+}
+#kwick2 {
+	background-color:#e1e1e1;
+}
+#kwick3 {
+	background-color:#e1e1e1;
+}
+#kwick4 { 
+	background-color:#e1e1e1;
+	margin-right: none;
+}   
+
+</style>
+
+</head>
+<body style="padding:50px;">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+</form>
+<p class="nav"><small><a href="index.html">swip demos</a> | <a href="http://code.google.com/p/jquery-swip">swip SVN</a> | <a href="http://code.google.com/p/jquery-swip/issues/list">report issue</a></small></p>
+<h1>Stretch Accordion Content</h1>
+<h3>$(selector).kwicks({options});</h3>
+<p>jQuery plugin (<a href="jquery.kwicks-1.5.1.js">jquery.kwicks-1.5.1.js</a>) used to create a content scroller.</p>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h4>Example 1</h4>
+<div id="example1" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-1-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-1-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-1-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-1-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-1-tab-1">
+                <p>Horizontal Stretch Accordian</p>
+            </div>
+			<div id="example-1-tab-2" style="overflow:auto">
+
+<ul id="kwicksExample1">  
+     <li id="kwick1"><p><img src="exampleImage.gif" style="float:left; padding:0 10px 10px 0"/>Decima mutationem esse odio dynamicus quod. Ii vulputate et me at mazim. Illum sed legentis placerat adipiscing anteposuerit. Sequitur quinta ipsum quod parum habent. Per modo iriure nulla ex minim. In minim option exerci placerat non. Quarta humanitatis legere per in feugait. Parum zzril elit hendrerit me saepius. In vel quam lobortis magna claritas. Quod dynamicus elit diam me mirum. </p></li>  
+     <li id="kwick2"><p><img src="exampleImage.gif" style="float:left; padding:0 10px 10px 0"/>Decima mutationem esse odio dynamicus quod. Ii vulputate et me at mazim. Illum sed legentis placerat adipiscing anteposuerit. Sequitur quinta ipsum quod parum habent. Per modo iriure nulla ex minim. In minim option exerci placerat non. Quarta humanitatis legere per in feugait. Parum zzril elit hendrerit me saepius. In vel quam lobortis magna claritas. Quod dynamicus elit diam me mirum. </p></li>  
+     <li id="kwick3"><p><img src="exampleImage.gif" style="float:left; padding:0 10px 10px 0"/>Decima mutationem esse odio dynamicus quod. Ii vulputate et me at mazim. Illum sed legentis placerat adipiscing anteposuerit. Sequitur quinta ipsum quod parum habent. Per modo iriure nulla ex minim. In minim option exerci placerat non. Quarta humanitatis legere per in feugait. Parum zzril elit hendrerit me saepius. In vel quam lobortis magna claritas. Quod dynamicus elit diam me mirum. </p></li>  
+     <li id="kwick4"><p><img src="exampleImage.gif" style="float:left; padding:0 10px 10px 0"/>Decima mutationem esse odio dynamicus quod. Ii vulputate et me at mazim. Illum sed legentis placerat adipiscing anteposuerit. Sequitur quinta ipsum quod parum habent. Per modo iriure nulla ex minim. In minim option exerci placerat non. Quarta humanitatis legere per in feugait. Parum zzril elit hendrerit me saepius. In vel quam lobortis magna claritas. Quod dynamicus elit diam me mirum. </p></li>   
+</ul>
+
+  
+
+<script type="text/javascript">
+$('#kwicksExample1').kwicks({  
+  max : 600,  
+  spacing : 5  
+}); 
+</script>
+
+			</div>
+            <div id="example-1-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-1-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt class="required">max - datatype:number, default:N/A, The width or height (in pixels) of a fully expanded kwick element. If isVertical is true, then max refers to the height - otherwise it is the width.</dt>
+			<dt>min - datatype:number, default:N/A, The width or height (in pixels) of a fully collapsed kwick element. If isVertical is true, then min refers to the height - otherwise it is the width.</dt>
+			<dt>isVertical - datatype:boolean, default:false, Kwicks will align vertically if true.</dt>
+			<dt>sticky - datatype:boolean, default:false, One kwick will always be expanded if true.</dt>
+			<dt>defaultKwick - datatype:number, default:0, The initially expanded kwick (if and only if sticky is true). Note: Zero based, left-to-right (or top-to-bottom).</dt>
+			<dt>event - datatype:boolean, default:'mouseover', The event that triggers the expand effect. Other likely candidates are click and dblclick.</dt>
+			<dt>duration - datatype:number, default:200, The number of milliseconds required for each animation to complete.</dt>
+			<dt>easing - datatype:boolean, default:N/A, A custom easing function for the animation (requires easing plugin).</dt>
+			<dt>spacing - datatype:number, default:0, The width (in pixels) separating each kwick element.</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h4>Example 2</h4>
+<div id="example2" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-2-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-2-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-2-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-2-tab-4"><span>Options (based on demo)</span></a></li>
+            </ul>
+            <div id="example-2-tab-1">
+                <p>Vertical Stretch Accordian</p>
+            </div>
+			<div id="example-2-tab-2" style="overflow:auto">
+
+<ul id="kwicksExample2">  
+     <li id="kwick1"><p><img src="exampleImage.gif" style="float:left; padding:0 10px 10px 0"/>Decima mutationem esse odio dynamicus quod. Ii vulputate et me at mazim. Illum sed legentis placerat adipiscing anteposuerit. Sequitur quinta ipsum quod parum habent. Per modo iriure nulla ex minim. In minim option exerci placerat non. Quarta humanitatis legere per in feugait. Parum zzril elit hendrerit me saepius. In vel quam lobortis magna claritas. Quod dynamicus elit diam me mirum. </p></li>  
+     <li id="kwick2"><p><img src="exampleImage.gif" style="float:left; padding:0 10px 10px 0"/>Decima mutationem esse odio dynamicus quod. Ii vulputate et me at mazim. Illum sed legentis placerat adipiscing anteposuerit. Sequitur quinta ipsum quod parum habent. Per modo iriure nulla ex minim. In minim option exerci placerat non. Quarta humanitatis legere per in feugait. Parum zzril elit hendrerit me saepius. In vel quam lobortis magna claritas. Quod dynamicus elit diam me mirum. </p></li>  
+     <li id="kwick3"><p><img src="exampleImage.gif" style="float:left; padding:0 10px 10px 0"/>Decima mutationem esse odio dynamicus quod. Ii vulputate et me at mazim. Illum sed legentis placerat adipiscing anteposuerit. Sequitur quinta ipsum quod parum habent. Per modo iriure nulla ex minim. In minim option exerci placerat non. Quarta humanitatis legere per in feugait. Parum zzril elit hendrerit me saepius. In vel quam lobortis magna claritas. Quod dynamicus elit diam me mirum. </p></li>  
+     <li id="kwick4"><p><img src="exampleImage.gif" style="float:left; padding:0 10px 10px 0"/>Decima mutationem esse odio dynamicus quod. Ii vulputate et me at mazim. Illum sed legentis placerat adipiscing anteposuerit. Sequitur quinta ipsum quod parum habent. Per modo iriure nulla ex minim. In minim option exerci placerat non. Quarta humanitatis legere per in feugait. Parum zzril elit hendrerit me saepius. In vel quam lobortis magna claritas. Quod dynamicus elit diam me mirum. </p></li>
+</ul>
+  
+
+<script type="text/javascript">
+$('#kwicksExample2').kwicks({  
+  max : 400,  
+  spacing : 3,
+  isVertical : true
+}); 
+</script>
+
+			</div>
+            <div id="example-2-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-2-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt class="required">max - datatype:number, default:N/A, The width or height (in pixels) of a fully expanded kwick element. If isVertical is true, then max refers to the height - otherwise it is the width.</dt>
+			<dt>min - datatype:number, default:N/A, The width or height (in pixels) of a fully collapsed kwick element. If isVertical is true, then min refers to the height - otherwise it is the width.</dt>
+			<dt>isVertical - datatype:boolean, default:false, Kwicks will align vertically if true.</dt>
+			<dt>sticky - datatype:boolean, default:false, One kwick will always be expanded if true.</dt>
+			<dt>defaultKwick - datatype:number, default:0, The initially expanded kwick (if and only if sticky is true). Note: Zero based, left-to-right (or top-to-bottom).</dt>
+			<dt>event - datatype:boolean, default:'mouseover', The event that triggers the expand effect. Other likely candidates are click and dblclick.</dt>
+			<dt>duration - datatype:number, default:200, The number of milliseconds required for each animation to complete.</dt>
+			<dt>easing - datatype:boolean, default:N/A, A custom easing function for the animation (requires easing plugin).</dt>
+			<dt>spacing - datatype:number, default:0, The width (in pixels) separating each kwick element.</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<h5>Possible upgrades</h5>
+<ul>
+<li>N/A</li>
+</ul>
+
+
+<script type="text/javascript">
+
+$('#example1 > ul').tabs({selected:0});
+$('#example1 > div:eq(2) pre code').html(replaceTags($('#example1 > div:eq(1)').html()));
+
+$('#example2 > ul').tabs({selected:0});
+$('#example2 > div:eq(2) pre code').html(replaceTags($('#example2 > div:eq(1)').html()));
+
+function replaceTags(stringTxt) {
+	var theExp = /<([^<>]*)>/g;
+	var newString = jQuery.trim(stringTxt.replace(theExp,"&lt;$1&gt;"));
+	return newString;
+}
+
+_uacct = "UA-162561-8";
+urchinTracker();
+</script>
+
+<script src="jquery.chili-2.1.1.js" type="text/javascript"></script>
+<script src="recipes.js" type="text/javascript"></script>
+
+</body>
+</html>
