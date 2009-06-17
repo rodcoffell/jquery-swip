@@ -8,23 +8,26 @@
 		var run = function(passingThis){
 			
 			if(settings.anchoredClassName){
-				$('.'+settings.anchoredClassName).fadeOut('fast',function(){
+				var $anchorClassName = $('.'+settings.anchoredClassName);
+				$anchorClassName.fadeOut('fast',function(){
 					if($.fn.draggable){
-						$('.'+settings.anchoredClassName).draggable('destory').trigger("unload").remove();	
+						$anchorClassName.draggable('destory').trigger("unload").remove();	
 					}else{
-						$('.'+settings.anchoredClassName).trigger("unload").remove();
+						$anchorClassName.trigger("unload").remove();
 					}
 				});
 				if(settings.functionCallOnClose){settings.functionCallAfterClose();}
 			}else{
-				$('#DOMWindowOverlay').fadeOut('fast',function(){
-					$('#DOMWindowOverlay').trigger('unload').unbind().remove();																	  
+				var $DOMWindowOverlay = $('#DOMWindowOverlay');
+				var $DOMWindow = $('#DOMWindow');
+				$DOMWindowOverlay.fadeOut('fast',function(){
+					$DOMWindowOverlay.trigger('unload').unbind().remove();																	  
 				});
-				$('#DOMWindow').fadeOut('fast',function(){
+				$DOMWindow.fadeOut('fast',function(){
 					if($.fn.draggable){
-						$('#DOMWindow').draggable("destroy").trigger("unload").remove();
+						$DOMWindow.draggable("destroy").trigger("unload").remove();
 					}else{
-						$('#DOMWindow').trigger("unload").remove();
+						$DOMWindow.trigger("unload").remove();
 					}
 				});
 			
@@ -88,7 +91,8 @@
 			windowPadding:10,
 			windowSource:'inline', //inline, ajax, iframe
 			windowSourceID:'',
-			windowSourceURL:''
+			windowSourceURL:'',
+			windowSourceAttrURL:'href'
 		};
 		
 		var settings = $.extend({}, $.fn.openDOMWindow.defaultsSettings , instanceSettings || {});
@@ -104,12 +108,13 @@
 		//Private Functions/////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		var sizeOverlay = function(){
+			var $DOMWindowOverlay = $('#DOMWindowOverlay');
 			if(shortcut.isIE6){//if IE 6
 				var overlayViewportHeight = document.documentElement.offsetHeight + document.documentElement.scrollTop - 4;
 				var overlayViewportWidth = document.documentElement.offsetWidth - 21;
-				$('#DOMWindowOverlay').css({'height':overlayViewportHeight +'px','width':overlayViewportWidth+'px'});
+				$DOMWindowOverlay.css({'height':overlayViewportHeight +'px','width':overlayViewportWidth+'px'});
 			}else{//else Firefox, safari, opera, IE 7+
-				$('#DOMWindowOverlay').css({'height':'100%','width':'100%','position':'fixed'});
+				$DOMWindowOverlay.css({'height':'100%','width':'100%','position':'fixed'});
 			}	
 		};
 		
@@ -120,27 +125,30 @@
 		};
 		
 		var centerDOMWindow = function() {
+			var $DOMWindow = $('#DOMWindow');
 			if(settings.height + 50 > shortcut.viewPortHeight()){//added 50 to be safe
-				$('#DOMWindow').css('left',Math.round(shortcut.viewPortWidth()/2) + shortcut.scrollOffsetWidth() - Math.round(($('#DOMWindow').outerWidth())/2));
+				$DOMWindow.css('left',Math.round(shortcut.viewPortWidth()/2) + shortcut.scrollOffsetWidth() - Math.round(($DOMWindow.outerWidth())/2));
 			}else{
-				$('#DOMWindow').css('left',Math.round(shortcut.viewPortWidth()/2) + shortcut.scrollOffsetWidth() - Math.round(($('#DOMWindow').outerWidth())/2));
-				$('#DOMWindow').css('top',Math.round(shortcut.viewPortHeight()/2) + shortcut.scrollOffsetHeight() - Math.round(($('#DOMWindow').outerHeight())/2));
+				$DOMWindow.css('left',Math.round(shortcut.viewPortWidth()/2) + shortcut.scrollOffsetWidth() - Math.round(($DOMWindow.outerWidth())/2));
+				$DOMWindow.css('top',Math.round(shortcut.viewPortHeight()/2) + shortcut.scrollOffsetHeight() - Math.round(($DOMWindow.outerHeight())/2));
 			}
 		};
 		
 		var centerLoader = function() {
+			var $DOMWindowLoader = $('#DOMWindowLoader');
 			if(shortcut.isIE6){//if IE 6
-				$('#DOMWindowLoader').css({'left':Math.round(shortcut.viewPortWidth()/2) + shortcut.scrollOffsetWidth() - Math.round(($('#DOMWindowLoader').innerWidth())/2),'position':'absolute'});
-				$('#DOMWindowLoader').css({'top':Math.round(shortcut.viewPortHeight()/2) + shortcut.scrollOffsetHeight() - Math.round(($('#DOMWindowLoader').innerHeight())/2),'position':'absolute'});
+				$DOMWindowLoader.css({'left':Math.round(shortcut.viewPortWidth()/2) + shortcut.scrollOffsetWidth() - Math.round(($DOMWindowLoader.innerWidth())/2),'position':'absolute'});
+				$DOMWindowLoader.css({'top':Math.round(shortcut.viewPortHeight()/2) + shortcut.scrollOffsetHeight() - Math.round(($DOMWindowLoader.innerHeight())/2),'position':'absolute'});
 			}else{
-				$('#DOMWindowLoader').css({'left':'50%','top':'50%','position':'fixed'});
+				$DOMWindowLoader.css({'left':'50%','top':'50%','position':'fixed'});
 			}
 			
 		};
 		
 		var fixedDOMWindow = function(){
-			$('#DOMWindow').css('left', settings.positionLeft + shortcut.scrollOffsetWidth());
-			$('#DOMWindow').css('top', + settings.positionTop + shortcut.scrollOffsetHeight());
+			var $DOMWindow = $('#DOMWindow');
+			$DOMWindow.css('left', settings.positionLeft + shortcut.scrollOffsetWidth());
+			$DOMWindow.css('top', + settings.positionTop + shortcut.scrollOffsetHeight());
 		};
 		
 		var showDOMWindow = function(instance){
@@ -179,10 +187,9 @@
 			
 			//get values from element clicked, or assume its passed as an option
 			settings.windowSourceID = $(passingThis).attr('href') || settings.windowSourceID;
-			settings.windowSourceURL = $(passingThis).attr('href') || settings.windowSourceURL;
+			settings.windowSourceURL = $(passingThis).attr(settings.windowSourceAttrURL) || settings.windowSourceURL;
 			settings.windowBGImage = settings.windowBGImage ? 'background-image:url('+settings.windowBGImage+')' : '';
 			var urlOnly, urlQueryObject;
-			
 			
 			if(settings.positionType == 'anchored'){//anchored DOM window
 				
@@ -247,9 +254,10 @@
 						$('body').append('<iframe id="DOMWindowIE6FixIframe"  src="blank.html"  style="width:100%;height:100%;z-index:9999;position:absolute;top:0;left:0;filter:alpha(opacity=0);"></iframe>');
 						sizeIE6Iframe();
 					}
-					sizeOverlay(); 
-					$('#DOMWindowOverlay').fadeIn('fast');
-					if(!settings.modal){$('#DOMWindowOverlay').click(function(){$.closeDOMWindow();});}
+					sizeOverlay();
+					var $DOMWindowOverlay = $('#DOMWindowOverlay');
+					$DOMWindowOverlay.fadeIn('fast');
+					if(!settings.modal){$DOMWindowOverlay.click(function(){$.closeDOMWindow();});}
 				}
 				
 				//loader
@@ -261,22 +269,30 @@
 				//add DOMwindow
 				$('body').append('<div id="DOMWindow" style="background-repeat:no-repeat;'+settings.windowBGImage+';overflow:auto;padding:'+settings.windowPadding+'px;display:none;height:'+settings.height+'px;width:'+settings.width+'px;background-color:'+settings.windowBGColor+';border:'+settings.borderSize+'px solid '+settings.borderColor+'; position:absolute;z-index:10001"></div>');
 				
+				var $DOMWindow = $('#DOMWindow');
 				//centered, absolute, or fixed
 				switch(settings.positionType){
 					case 'centered':
 						centerDOMWindow();
 						if(settings.height + 50 > shortcut.viewPortHeight()){//added 50 to be safe
-							$('#DOMWindow').css('top', (settings.fixedWindowY + shortcut.scrollOffsetHeight()) + 'px');
+							$DOMWindow.css('top', (settings.fixedWindowY + shortcut.scrollOffsetHeight()) + 'px');
 						}
 					break;
 					case 'absolute':
-						$('#DOMWindow').css({'top':(settings.positionTop+shortcut.scrollOffsetHeight())+'px','left':(settings.positionLeft+shortcut.scrollOffsetWidth())+'px'});
+						$DOMWindow.css({'top':(settings.positionTop+shortcut.scrollOffsetHeight())+'px','left':(settings.positionLeft+shortcut.scrollOffsetWidth())+'px'});
 						if($.fn.draggable){
-							if(settings.draggable){$('#DOMWindow').draggable({cursor:'move'});}
+							if(settings.draggable){$DOMWindow.draggable({cursor:'move'});}
 						}
 					break;
 					case 'fixed':
 						fixedDOMWindow();
+					break;
+					case 'anchoredSingleWindow':
+						var anchoredPositions = $(settings.anchoredSelector).position();
+						var anchoredPositionX = anchoredPositions.left + settings.positionLeft;
+						var anchoredPositionY = anchoredPositions.top + settings.positionTop;
+						$DOMWindow.css({'top':anchoredPositionY + 'px','left':anchoredPositionX+'px'});
+								
 					break;
 				}
 				
@@ -295,14 +311,14 @@
 				
 				switch(settings.windowSource){
 					case 'inline'://////////////////////////////// inline //////////////////////////////////////////
-						$("#DOMWindow").append($(settings.windowSourceID).children());
-						$("#DOMWindow").unload(function(){// move elements back when you're finished
-							$(settings.windowSourceID).append( $("#DOMWindow").children());				
+						$DOMWindow.append($(settings.windowSourceID).children());
+						$DOMWindow.unload(function(){// move elements back when you're finished
+							$(settings.windowSourceID).append($DOMWindow.children());				
 						});
 						showDOMWindow();
 					break;
 					case 'iframe'://////////////////////////////// iframe //////////////////////////////////////////
-						$('#DOMWindow').append('<iframe frameborder="0" hspace="0" wspace="0" src="'+settings.windowSourceURL+'" name="DOMWindowIframe'+Math.round(Math.random()*1000)+'" style="width:100%;height:100%;border:none;background-color:#fff;" id="DOMWindowIframe" ></iframe>');
+						$DOMWindow.append('<iframe frameborder="0" hspace="0" wspace="0" src="'+settings.windowSourceURL+'" name="DOMWindowIframe'+Math.round(Math.random()*1000)+'" style="width:100%;height:100%;border:none;background-color:#fff;" id="DOMWindowIframe" ></iframe>');
 						$('#DOMWindowIframe').load(showDOMWindow());
 					break;
 					case 'ajax'://////////////////////////////// ajax //////////////////////////////////////////
@@ -315,14 +331,14 @@
 								urlOnly = settings.windowSourceURL;
 								urlQueryObject = {};
 							}
-							$("#DOMWindow").load(urlOnly,urlQueryObject,function(){
+							$DOMWindow.load(urlOnly,urlQueryObject,function(){
 								showDOMWindow();
 							});
 						}else{
 							if(settings.windowSourceURL.indexOf("?") == -1){ //no query string, so add one
 								settings.windowSourceURL += '?';
 							}
-							$("#DOMWindow").load(
+							$DOMWindow.load(
 								settings.windowSourceURL + '&random=' + (new Date().getTime()),function(){
 								showDOMWindow();
 							});

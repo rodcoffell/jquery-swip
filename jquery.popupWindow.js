@@ -1,7 +1,11 @@
 (function($){ 		  
-	$.fn.popupWindow = function(instanceSettings){	
-			
-		$.fn.popupWindow.defaultsSettings = {
+	$.fn.popupWindow = function(instanceSettings){
+		
+		return this.each(function(){
+		
+		$(this).click(function(){
+		
+		$.fn.popupWindow.defaultSettings = {
 			centerBrowser:0, // center window over browser window? {1 (YES) or 0 (NO)}. overrides top and left
 			centerScreen:0, // center window over entire screen? {1 (YES) or 0 (NO)}. overrides top and left
 			height:500, // sets the height in pixels of the window.
@@ -18,7 +22,7 @@
 			toolbar:0 // determines whether a toolbar (includes the forward and back buttons) is displayed {1 (YES) or 0 (NO)}.
 		};
 		
-		settings = $.extend({}, $.fn.popupWindow.defaultsSettings , instanceSettings || {});
+		settings = $.extend({}, $.fn.popupWindow.defaultSettings, instanceSettings || {});
 		
 		var windowFeatures =    'height=' + settings.height +
 								',width=' + settings.width +
@@ -29,13 +33,12 @@
 								',location=' + settings.location +
 								',menuBar=' + settings.menubar;
 
-		return this.each(function(index){
-								  
-			$(this).click(function(){
 				settings.windowName = this.name || settings.windowName;
 				settings.windowURL = this.href || settings.windowURL;
 				var centeredY,centeredX;
+			
 				if(settings.centerBrowser){
+						
 					if ($.browser.msie) {//hacked together for IE browsers
 						centeredY = (window.screenTop - 120) + ((((document.documentElement.clientHeight + 120)/2) - (settings.height/2)));
 						centeredX = window.screenLeft + ((((document.body.offsetWidth + 20)/2) - (settings.width/2)));

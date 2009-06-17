@@ -96,7 +96,7 @@ loaderWidth:17
 			<dt>overlayOpacity - datatype:string, default:'85'</dt>
 			<dt class="doNotUse">positionLeft - datatype:number, default:0</dt>
 			<dt class="doNotUse">positionTop - datatype:number, default:0</dt>
-			<dt class="doNotUse">positionType - datatype:string, default:'centerred', options:centered | anchored | fixed | absolute</dt>
+			<dt class="doNotUse">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
 			<dt>width - datatype:number, default:500</dt>
 			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
 			<dt>windowBGImage - datatype:string, default:null</dt>
@@ -165,7 +165,7 @@ windowHTTPType:'post'
 			<dt>overlayOpacity - datatype:string, default:'85'</dt>
 			<dt>positionLeft - datatype:number, default:0</dt>
 			<dt>positionTop - datatype:number, default:0</dt>
-			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | fixed | absolute</dt>
+			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
 			<dt>width - datatype:number, default:500</dt>
 			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
 			<dt>windowBGImage - datatype:string, default:null</dt>
@@ -234,7 +234,7 @@ loaderWidth:17
 			<dt>overlayOpacity - datatype:string, default:'85'</dt>
 			<dt>positionLeft - datatype:number, default:0</dt>
 			<dt>positionTop - datatype:number, default:0</dt>
-			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | fixed | absolute</dt>
+			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
 			<dt>width - datatype:number, default:500</dt>
 			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
 			<dt>windowBGImage - datatype:string, default:null</dt>
@@ -309,7 +309,7 @@ overlayOpacity:0
 			<dt>overlayOpacity - datatype:string, default:'85'</dt>
 			<dt>positionLeft - datatype:number, default:0</dt>
 			<dt>positionTop - datatype:number, default:0</dt>
-			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | fixed | absolute</dt>
+			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
 			<dt>width - datatype:number, default:500</dt>
 			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
 			<dt>windowBGImage - datatype:string, default:null</dt>
@@ -375,7 +375,7 @@ $('.example5closeDOMWindow').closeDOMWindow({eventType:'click'});
 			<dt>overlayOpacity - datatype:string, default:'85'</dt>
 			<dt class="doNotUse">positionLeft - datatype:number, default:0</dt>
 			<dt class="doNotUse">positionTop - datatype:number, default:0</dt>
-			<dt class="doNotUse">positionType - datatype:string, default:'centerred', options:centered | anchored | fixed | absolute</dt>
+			<dt class="doNotUse">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
 			<dt>width - datatype:number, default:500</dt>
 			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
 			<dt>windowBGImage - datatype:string, default:null</dt>
@@ -456,7 +456,7 @@ $('.example6DOMWindowClose').closeDOMWindow({anchoredClassName:'exampleWindow6',
 			<dt>overlayOpacity - datatype:string, default:'85'</dt>
 			<dt>positionLeft - datatype:number, default:0</dt>
 			<dt>positionTop - datatype:number, default:0</dt>
-			<dt class="required">positionType - datatype:string, default:'centerred', options:centered | anchored | fixed | absolute</dt>
+			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
 			<dt>width - datatype:number, default:500</dt>
 			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
 			<dt>windowBGImage - datatype:string, default:null</dt>
@@ -551,7 +551,7 @@ $(".example7DOMWindow").hover(
 			<dt>overlayOpacity - datatype:string, default:'85'</dt>
 			<dt>positionLeft - datatype:number, default:0</dt>
 			<dt>positionTop - datatype:number, default:0</dt>
-			<dt class="required">positionType - datatype:string, default:'centerred', options:centered | anchored | fixed | absolute</dt>
+			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
 			<dt>width - datatype:number, default:500</dt>
 			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
 			<dt>windowBGImage - datatype:string, default:null</dt>
@@ -631,7 +631,100 @@ $('.example8DOMWindow').click(function(){
 			<dt>overlayOpacity - datatype:string, default:'85'</dt>
 			<dt class="doNotUse">positionLeft - datatype:number, default:0</dt>
 			<dt class="doNotUse">positionTop - datatype:number, default:0</dt>
-			<dt class="doNotUse">positionType - datatype:string, default:'centerred', options:centered | anchored | fixed | absolute</dt>
+			<dt class="doNotUse">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
+			<dt>width - datatype:number, default:500</dt>
+			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
+			<dt>windowBGImage - datatype:string, default:null</dt>
+			<dt class="doNotUse">windowHTTPType - datatype:string, default:'get', options: get | post</dt>
+			<dt>windowPadding - datatype:number, default:10</dt>
+			<dt class="doNotUse">windowSource - datatype:string, default:'inline', options:inline | ajax | iframe</dt>
+			<dt class="doNotUse">windowSourceID - datatype:string, default:empty string</dt>
+			<dt class="doNotUse">windowSourceURL - datatype:string, default:empty string</dt>
+			</dl>
+			</div>
+			
+</div>
+
+<hr /><!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<h4>Example 9</h4>
+<div id="example9" class="tabContainer">
+            <ul>
+                <li class="ui-tabs-nav-item"><a href="#example-9-tab-1"><span>Description</span></a></li>
+                <li class="ui-tabs-nav-item"><a href="#example-9-tab-2"><span>Demo</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-9-tab-3"><span>Demo Code</span></a></li>
+				<li class="ui-tabs-nav-item"><a href="#example-9-tab-4"><span>Options (based on this demo)</span></a></li>
+            </ul>
+            <div id="example-9-tab-1">
+                <p>Open a DOM window using inline content embedded in the page. The window is anchored to a specified element and the anchored window is reused (positionType:'anchoredSingleWindow') when the overlay is not used.</p>
+            </div>
+			<div id="example-9-tab-2" style="overflow:auto">
+<p><a href="#example9Content" class="example9DOMWindow">Open DOM Window</a></p>
+<p><a href="#example9aContent" class="example9aDOMWindow">Open DOM Window</a></p>
+<script type="text/javascript">
+$('.example9DOMWindow').click(function(){
+	$.openDOMWindow({
+		windowSourceID:'#example9Content',
+		height:220, 
+		width:320,
+		overlay:0,
+		positionType:'anchoredSingleWindow', 
+		windowPadding:20, 
+		windowBGColor:'#ccc', 
+		borderSize:'0',
+		anchoredSelector:'.example9DOMWindow',
+		positionLeft:120,
+		positionTop:-150
+	});
+	return false;
+});
+$('.example9aDOMWindow').click(function(){
+	$.openDOMWindow({
+		windowSourceID:'#example9Content',
+		height:220, 
+		width:320,
+		overlay:0,
+		positionType:'anchoredSingleWindow', 
+		windowPadding:20, 
+		windowBGColor:'#ccc', 
+		borderSize:'0',
+		anchoredSelector:'.example9aDOMWindow',
+		positionLeft:120,
+		positionTop:-150
+	});
+	return false;
+});
+</script>
+<div id="example9Content" style=" display:none;">
+<p>Inline Content</p>
+<p><a href="#" class="closeDOMWindow">close</a></p>
+<p>Consequat ea Investigationes in enim congue. Option velit volutpat quod blandit ex. Congue parum praesent aliquam nam clari. Qui praesent quam sollemnes id vulputate. In imperdiet diam at sequitur et. Minim delenit in dolor dolore typi.</p>
+</div>
+			</div>
+            <div id="example-9-tab-3"><pre><code class="html"></code></pre></div>
+			<div id="example-9-tab-4">
+			<p><span class="required">required</span> | <span>optional</span> | <span class="doNotUse">not used</span></p>
+			<hr />
+			<dl>
+			<dt class="doNotUse">anchoredClassName - datatype:string, default:empty string</dt>
+			<dt class="required">anchoredSelector - datatype:string, default:empty string</dt>
+			<dt>borderColor - datatype:string, default:'#ccc'</dt>
+			<dt>borderSize - datatype:string, default:'4'</dt>
+			<dt>draggable - datatype:boolean, default:0</dt>
+			<dt>eventType - datatype:string, default:null, possible options:blur | focus | load | resize | scroll | unload | click | dblclick | mousedown | mouseup | mousemove | mouseover | mouseout | mouseenter | mouseleave | change | select | submit | keydown | keypress | keyup | error</dt>
+			<dt>fixedWindowY - datatype:number, default:100</dt>
+			<dt>height - datatype:number, default:500</dt>
+			<dt>loader - datatype:boolean, default:0</dt>
+			<dt>loaderHeight - datatype:number, default:0</dt>
+			<dt>loaderImagePath - datatype:string, default:empty string</dt>
+			<dt>loaderWidth - datatype:number, default:0</dt>
+			<dt>modal - datatype:boolean, default:0</dt>
+			<dt>overlay - datatype:boolean, default:1</dt>
+			<dt>overlayColor- datatype:string, default:'#000'</dt>
+			<dt>overlayOpacity - datatype:string, default:'85'</dt>
+			<dt>positionLeft - datatype:number, default:0</dt>
+			<dt>positionTop - datatype:number, default:0</dt>
+			<dt class="required">positionType - datatype:string, default:'centered', options:centered | anchored | anchoredSingleWindow | fixed | absolute</dt>
 			<dt>width - datatype:number, default:500</dt>
 			<dt>windowBGColor - datatype:string, default:'#fff'</dt>
 			<dt>windowBGImage - datatype:string, default:null</dt>
@@ -680,6 +773,9 @@ $('#example7 > div:eq(2) pre code').html(replaceTags($('#example7 > div:eq(1)').
 	
 $('#example8 > ul').tabs({selected:0});
 $('#example8 > div:eq(2) pre code').html(replaceTags($('#example8 > div:eq(1)').html()));
+
+$('#example9 > ul').tabs({selected:0});
+$('#example9 > div:eq(2) pre code').html(replaceTags($('#example9 > div:eq(1)').html()));
   
 function replaceTags(stringTxt) {
 	var theExp = /<([^<>]*)>/g;
