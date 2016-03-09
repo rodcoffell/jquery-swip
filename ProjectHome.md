@@ -1,0 +1,1 @@
+jQuery-swip are a collection of jQuery plugins (javascript, css, html) specifically developed to aid the creation of common interface patterns found in browser based applications. The intention of the developer was to create a code base for these patterns that can be used to accommodate any visual design. These plugins are an extension to the jQuery UI plugins.
